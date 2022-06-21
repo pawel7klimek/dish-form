@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import {useForm, Controller} from "react-hook-form";
+import {useForm, Controller, useFormState} from "react-hook-form";
 import {
   Button,
   FormControl,
@@ -10,17 +10,23 @@ import {
   Slider,
   TextField,
 } from "@mui/material";
+import {v4 as uuidv4} from "uuid";
 
 function App() {
   const {
-    register,
     watch,
     control,
     formState: {errors},
     handleSubmit,
-  } = useForm<formData>();
+  } = useForm<formData>({
+    defaultValues: {
+      id: "",
+      name: "",
+    },
+  });
 
   type data = {
+    id: string;
     name: string;
     preparation_time: string;
     pizza?: {no_of_slices: number; diameter: number};
@@ -28,14 +34,18 @@ function App() {
     sandwich?: {slices_of_bread: number};
   };
 
-  type formData = data & {type: "pizza" | "soup" | "sandwich"};
+  type formData = data & {type: "pizza" | "soup" | "sandwich" | ""};
 
-  const watchSelect = watch("type", "pizza");
+  const watchSelect = watch("type");
 
   const onSubmit = (data: formData) => {
-    console.log(data[data.type]);
-    alert(JSON.stringify(data));
+    if (data.type !== "") {
+      data.id = uuidv4();
+      alert(JSON.stringify(data));
+    }
   };
+
+  const {isValidating, touchedFields} = useFormState({control});
 
   const buildSelect = (dish: string) => {
     switch (dish) {
@@ -47,6 +57,7 @@ function App() {
               control={control}
               render={({field: {onChange, value}, fieldState: {error}}) => (
                 <TextField
+                  disabled={isValidating}
                   type="number"
                   label="no_of_slices"
                   variant="outlined"
@@ -83,6 +94,7 @@ function App() {
           <Controller
             name="soup.spiciness_scale"
             control={control}
+            defaultValue={1}
             render={({field: {onChange, value}, fieldState: {error}}) => (
               <>
                 <InputLabel id="spiciness-slider-label">
@@ -137,7 +149,6 @@ function App() {
         <Controller
           name="name"
           control={control}
-          defaultValue=""
           render={({field: {onChange, value}, fieldState: {error}}) => (
             <TextField
               autoComplete="off"
@@ -156,7 +167,6 @@ function App() {
         <Controller
           name="preparation_time"
           control={control}
-          defaultValue=""
           render={({field: {onChange, value}, fieldState: {error}}) => (
             <TextField
               label="preparation time"
@@ -173,13 +183,17 @@ function App() {
         <Controller
           name="type"
           control={control}
+          // defaultValue=""
           render={({field: {onChange, value}, fieldState: {error}}) => (
             <>
               <FormControl variant="standard" sx={{m: 1, minWidth: 120}}>
                 <InputLabel margin="dense" id="type-select-label">
-                  Choose a type
+                  select dish type
                 </InputLabel>
                 <Select
+                  error={touchedFields.type}
+                  // error={value !== "" && !touchedFields.type}
+                  // error={isValidating && !touchedFields.type}
                   fullWidth
                   labelId="type-select-label"
                   id="type-select"
@@ -189,9 +203,7 @@ function App() {
                   variant="outlined"
                   style={{width: 400}}
                 >
-                  <MenuItem value="" disabled>
-                    Choose a type
-                  </MenuItem>
+                  <MenuItem disabled>select dish type</MenuItem>
                   <MenuItem value={"pizza"}>pizza</MenuItem>
                   <MenuItem value={"soup"}>soup</MenuItem>
                   <MenuItem value={"sandwich"}>sandwich</MenuItem>
@@ -199,6 +211,7 @@ function App() {
               </FormControl>
             </>
           )}
+          rules={{required: "Dish type required"}}
         />
         {buildSelect(watchSelect)}
         <Button onClick={handleSubmit(onSubmit)} variant="outlined">
