@@ -2,7 +2,7 @@ import {Control, Controller} from "react-hook-form";
 import {TextField} from "@mui/material";
 import {formData} from "../types";
 
-const PreparationTimeForm = ({control}: {control: Control<formData, any>}) => {
+const PreparationTimeField = ({control}: {control: Control<formData, any>}) => {
   return (
     <Controller
       name="preparation_time"
@@ -17,15 +17,17 @@ const PreparationTimeForm = ({control}: {control: Control<formData, any>}) => {
           error={!!error}
           placeholder="HH:MM:SS"
           helperText={error ? error.message : null}
-          // inputProps={{
-          //   inputMode: "numeric",
-          //   pattern: "[1-6]{1,8}",
-          // }}
         />
       )}
-      rules={{required: "Preparation time required"}}
+      rules={{
+        required: "Preparation time required",
+        pattern: {
+          value: /^((?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$)/,
+          message: "HH:MM:SS format required",
+        },
+      }}
     />
   );
 };
 
-export default PreparationTimeForm;
+export default PreparationTimeField;

@@ -3,13 +3,13 @@ import "./App.css";
 import {useForm} from "react-hook-form";
 import {Button} from "@mui/material";
 import {formData, dataToSend} from "./types";
-import NameForm from "./components/NameForm";
-import PreparationTimeForm from "./components/PreparationTimeForm";
-import SelectForm from "./components/SelectForm";
-import NoOfSlicesForm from "./components/NoOfSlicesForm";
-import DiameterForm from "./components/DiameterForm";
-import SpicinessForm from "./components/SpicinessForm";
-import SlicesOfBreadForm from "./components/SlicesOfBreadForm";
+import NameField from "./components/NameField";
+import PreparationTimeField from "./components/PreparationTimeField";
+import SelectField from "./components/SelectField";
+import NoOfSlicesField from "./components/NoOfSlicesField";
+import DiameterField from "./components/DiameterField";
+import SpicinessField from "./components/SpicinessField";
+import SlicesOfBreadField from "./components/SlicesOfBreadField";
 
 function App() {
   const {
@@ -18,7 +18,16 @@ function App() {
     formState: {isSubmitSuccessful},
     handleSubmit,
     reset,
-  } = useForm<formData>();
+  } = useForm<formData>({
+    defaultValues: {
+      name: "",
+      preparation_time: "",
+      type: "",
+      pizza: {no_of_slices: "", diameter: ""},
+      soup: {spiciness_scale: 1},
+      sandwich: {slices_of_bread: ""},
+    },
+  });
 
   const watchSelect = watch("type");
 
@@ -67,6 +76,7 @@ function App() {
         dataToSend.slices_of_bread = parseInt(data.sandwich?.slices_of_bread);
       }
       setSubmittedData(data);
+      console.log(sendPOST(dataToSend));
     }
   };
 
@@ -76,10 +86,10 @@ function App() {
         return (
           <>
             <div className="box no_of_slices">
-              <NoOfSlicesForm control={control} />
+              <NoOfSlicesField control={control} />
             </div>
             <div className="box diameter">
-              <DiameterForm control={control} />
+              <DiameterField control={control} />
             </div>
           </>
         );
@@ -87,14 +97,14 @@ function App() {
       case "soup":
         return (
           <div className="box spiciness_scale">
-            <SpicinessForm control={control} />
+            <SpicinessField control={control} />
           </div>
         );
 
       case "sandwich":
         return (
           <div className="box slices_of_bread">
-            <SlicesOfBreadForm control={control} />
+            <SlicesOfBreadField control={control} />
           </div>
         );
     }
@@ -102,20 +112,22 @@ function App() {
 
   return (
     <div className="main-box">
-      <div className="box name">
-        <NameForm control={control} />
-      </div>
-      <div className="box preparation_time">
-        <PreparationTimeForm control={control} />
-      </div>
-      <div className="select box">
-        <SelectForm control={control} />
-      </div>
-      {buildSelect(watchSelect)}
-      <div className="button-box">
-        <Button onClick={handleSubmit(onSubmit)} variant="outlined">
-          Submit
-        </Button>
+      <div className="form">
+        <div className="box name">
+          <NameField control={control} />
+        </div>
+        <div className="box preparation_time">
+          <PreparationTimeField control={control} />
+        </div>
+        <div className="select box">
+          <SelectField control={control} />
+        </div>
+        {buildSelect(watchSelect)}
+        <div className="button-box">
+          <Button onClick={handleSubmit(onSubmit)} variant="outlined">
+            Submit
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -2,26 +2,26 @@ import {TextField} from "@mui/material";
 import {Control, Controller} from "react-hook-form";
 import {formData} from "../types";
 
-const DiameterForm = ({control}: {control: Control<formData, any>}) => {
+const SlicesOfBreadField = ({control}: {control: Control<formData, any>}) => {
   return (
     <Controller
-      name="pizza.diameter"
+      name="sandwich.slices_of_bread"
       control={control}
       render={({field: {onChange, value}, fieldState: {error}}) => (
         <TextField
           type="number"
-          label="diameter"
+          label="number of slices"
           variant="standard"
           value={value}
           onChange={onChange}
           error={!!error}
-          placeholder="diameter"
+          placeholder="number of slices"
           helperText={error ? error.message : null}
         />
       )}
-      rules={{required: "Pizza diameter required"}}
+      rules={{required: "Number of slices required"}}
     />
   );
 };
 
-export default DiameterForm;
+export default SlicesOfBreadField;

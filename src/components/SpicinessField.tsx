@@ -2,12 +2,11 @@ import {InputLabel, Slider} from "@mui/material";
 import {Control, Controller} from "react-hook-form";
 import {formData} from "../types";
 
-const SpicinessForm = ({control}: {control: Control<formData, any>}) => {
+const SpicinessField = ({control}: {control: Control<formData, any>}) => {
   return (
     <Controller
       name="soup.spiciness_scale"
       control={control}
-      defaultValue={1}
       render={({field: {onChange, value}, fieldState: {error}}) => (
         <>
           <InputLabel id="spiciness-slider-label">
@@ -29,4 +28,4 @@ const SpicinessForm = ({control}: {control: Control<formData, any>}) => {
   );
 };
 
-export default SpicinessForm;
+export default SpicinessField;

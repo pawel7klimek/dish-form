@@ -2,7 +2,7 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {Control, Controller} from "react-hook-form";
 import {formData} from "../types";
 
-const SelectForm = ({control}: {control: Control<formData, any>}) => {
+const SelectField = ({control}: {control: Control<formData, any>}) => {
   return (
     <Controller
       name="type"
@@ -36,4 +36,4 @@ const SelectForm = ({control}: {control: Control<formData, any>}) => {
   );
 };
 
-export default SelectForm;
+export default SelectField;

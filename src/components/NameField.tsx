@@ -2,7 +2,7 @@ import {Control, Controller} from "react-hook-form";
 import {TextField} from "@mui/material";
 import {formData} from "../types";
 
-const NameForm = ({control}: {control: Control<formData, any>}) => {
+const NameField = ({control}: {control: Control<formData, any>}) => {
   return (
     <div className="box name">
       <Controller
@@ -26,4 +26,4 @@ const NameForm = ({control}: {control: Control<formData, any>}) => {
   );
 };
 
-export default NameForm;
+export default NameField;

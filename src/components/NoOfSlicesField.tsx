@@ -2,7 +2,7 @@ import {TextField} from "@mui/material";
 import {Control, Controller} from "react-hook-form";
 import {formData} from "../types";
 
-const NoOfSlicesForm = ({control}: {control: Control<formData, any>}) => {
+const NoOfSlicesField = ({control}: {control: Control<formData, any>}) => {
   return (
     <Controller
       name="pizza.no_of_slices"
@@ -24,4 +24,4 @@ const NoOfSlicesForm = ({control}: {control: Control<formData, any>}) => {
   );
 };
 
-export default NoOfSlicesForm;
+export default NoOfSlicesField;
