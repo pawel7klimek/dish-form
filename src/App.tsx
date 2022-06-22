@@ -58,7 +58,6 @@ function App() {
 
   const onSubmit = async (data: formData) => {
     if (data.type !== "") {
-      alert(JSON.stringify(data));
       const dataToSend: dataToSend = {
         name: data.name,
         preparation_time: data.preparation_time,
