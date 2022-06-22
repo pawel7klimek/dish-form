@@ -1,6 +1,6 @@
 import {Control, Controller} from "react-hook-form";
 import {TextField} from "@mui/material";
-import {formData} from "./types";
+import {formData} from "../types";
 
 const PreparationTimeForm = ({control}: {control: Control<formData, any>}) => {
   return (

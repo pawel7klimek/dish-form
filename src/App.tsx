@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
 import "./App.css";
-import {useForm, Controller} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {Button} from "@mui/material";
 import {formData, dataToSend} from "./types";
-import NameForm from "./NameForm";
-import PreparationTimeForm from "./PreparationTimeForm";
-import SelectForm from "./SelectForm";
-import NoOfSlicesForm from "./NoOfSlicesForm";
-import DiameterForm from "./DiameterForm";
-import SpicinessForm from "./SpicinessForm";
-import SlicesOfBreadForm from "./SlicesOfBreadForm";
+import NameForm from "./components/NameForm";
+import PreparationTimeForm from "./components/PreparationTimeForm";
+import SelectForm from "./components/SelectForm";
+import NoOfSlicesForm from "./components/NoOfSlicesForm";
+import DiameterForm from "./components/DiameterForm";
+import SpicinessForm from "./components/SpicinessForm";
+import SlicesOfBreadForm from "./components/SlicesOfBreadForm";
 
 function App() {
   const {
@@ -66,9 +66,8 @@ function App() {
         //@ts-ignore
         dataToSend.slices_of_bread = parseInt(data.sandwich?.slices_of_bread);
       }
-      // const response = await sendPOST(dataToSend);
-      // console.log(response);
       setSubmittedData(data);
+      console.log(dataToSend);
     }
   };
 

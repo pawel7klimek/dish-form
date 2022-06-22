@@ -1,16 +1,16 @@
 import {TextField} from "@mui/material";
 import {Control, Controller} from "react-hook-form";
-import {formData} from "./types";
+import {formData} from "../types";
 
-const SlicesOfBreadForm = ({control}: {control: Control<formData, any>}) => {
+const NoOfSlicesForm = ({control}: {control: Control<formData, any>}) => {
   return (
     <Controller
-      name="sandwich.slices_of_bread"
+      name="pizza.no_of_slices"
       control={control}
       render={({field: {onChange, value}, fieldState: {error}}) => (
         <TextField
           type="number"
-          label="number of slices of bread"
+          label="no_of_slices"
           variant="standard"
           value={value}
           onChange={onChange}
@@ -24,4 +24,4 @@ const SlicesOfBreadForm = ({control}: {control: Control<formData, any>}) => {
   );
 };
 
-export default SlicesOfBreadForm;
+export default NoOfSlicesForm;

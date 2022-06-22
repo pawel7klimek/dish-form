@@ -1,6 +1,6 @@
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {Control, Controller} from "react-hook-form";
-import {formData} from "./types";
+import {formData} from "../types";
 
 const SelectForm = ({control}: {control: Control<formData, any>}) => {
   return (
