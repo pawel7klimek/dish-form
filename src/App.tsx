@@ -67,7 +67,6 @@ function App() {
         dataToSend.slices_of_bread = parseInt(data.sandwich?.slices_of_bread);
       }
       setSubmittedData(data);
-      console.log(dataToSend);
     }
   };
 
@@ -113,7 +112,7 @@ function App() {
         <SelectForm control={control} />
       </div>
       {buildSelect(watchSelect)}
-      <div className="box button">
+      <div className="button-box">
         <Button onClick={handleSubmit(onSubmit)} variant="outlined">
           Submit
         </Button>

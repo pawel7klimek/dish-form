@@ -10,7 +10,7 @@ const SlicesOfBreadForm = ({control}: {control: Control<formData, any>}) => {
       render={({field: {onChange, value}, fieldState: {error}}) => (
         <TextField
           type="number"
-          label="number of slices of bread"
+          label="number of slices"
           variant="standard"
           value={value}
           onChange={onChange}

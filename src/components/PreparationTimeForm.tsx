@@ -1,6 +1,7 @@
 import {Control, Controller} from "react-hook-form";
 import {TextField} from "@mui/material";
 import {formData} from "../types";
+import {ClassNames} from "@emotion/react";
 
 const PreparationTimeForm = ({control}: {control: Control<formData, any>}) => {
   return (
@@ -9,6 +10,7 @@ const PreparationTimeForm = ({control}: {control: Control<formData, any>}) => {
       control={control}
       render={({field: {onChange, value}, fieldState: {error}}) => (
         <TextField
+          autoComplete="off"
           label="preparation time"
           variant="standard"
           value={value}
@@ -16,6 +18,10 @@ const PreparationTimeForm = ({control}: {control: Control<formData, any>}) => {
           error={!!error}
           placeholder="HH:MM:SS"
           helperText={error ? error.message : null}
+          // inputProps={{
+          //   inputMode: "numeric",
+          //   pattern: "[1-6]{1,8}",
+          // }}
         />
       )}
       rules={{required: "Preparation time required"}}
